@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ender Alvarez — Diseño gráfico y dirección de arte</title>
+<meta name="description" content="Portafolio de Ender Alvarez, diseñador gráfico y director de arte en Guatemala. Branding, identidad visual y líneas gráficas para redes sociales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f2ee; --fg:#141414; --muted:#6d6a65; --line:#d9d5ce;
+    --card:#e9e6e0; --accent:#b8743f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#121212; --fg:#efece6; --muted:#9a968f; --line:#2c2b29; --card:#1d1c1b; --accent:#d29862; }
+  }
+  :root[data-theme="dark"]{ --bg:#121212; --fg:#efece6; --muted:#9a968f; --line:#2c2b29; --card:#1d1c1b; --accent:#d29862; }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);font-family:"Inter Tight",system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+  .serif{font-family:"Instrument Serif",serif;font-weight:400}
+
+  /* Nav */
+  header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px}
+  .logo{font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:28px;list-style:none;font-size:14px}
+  nav ul a{color:var(--muted);transition:color .2s}
+  nav ul a:hover{color:var(--fg)}
+
+  /* Hero */
+  .hero{padding:clamp(56px,10vw,128px) 0 0}
+  .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);display:flex;gap:12px;align-items:center;margin-bottom:28px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  h1{font-size:clamp(44px,8.6vw,124px);font-weight:500;letter-spacing:-.045em;line-height:.95}
+  h1 em{font-family:"Instrument Serif",serif;font-weight:400;letter-spacing:-.02em}
+  .hero-foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:clamp(40px,6vw,72px);align-items:end}
+  .hero-foot p{max-width:44ch;color:var(--muted)}
+  .stats{display:flex;gap:clamp(24px,4vw,48px);justify-content:flex-end;flex-wrap:wrap}
+  .stat b{display:block;font-size:32px;font-weight:500;letter-spacing:-.03em;line-height:1.1}
+  .stat small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .mosaic{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:clamp(48px,7vw,88px)}
+  .mosaic a{aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:var(--card)}
+  .mosaic img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .mosaic a:hover img{transform:scale(1.04)}
+
+  /* Section heads */
+  .sec{padding:clamp(64px,9vw,120px) 0 clamp(32px,4vw,48px)}
+  h2{font-size:clamp(30px,4.4vw,56px);font-weight:500;letter-spacing:-.035em;line-height:1}
+  h2 em{font-family:"Instrument Serif",serif;font-weight:400}
+  .index{list-style:none;margin-top:40px;border-top:1px solid var(--line);counter-reset:none}
+  .index a{display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);transition:padding .3s,color .2s}
+  .index a:hover{padding-left:10px;color:var(--accent)}
+  .index .n{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .index .t{font-size:clamp(20px,2.4vw,28px);letter-spacing:-.02em}
+  .index .k{font-size:13px;color:var(--muted);text-align:right}
+
+  /* Project bands */
+  .project{background:var(--pbg);color:var(--pfg);padding:clamp(56px,8vw,112px) 0;scroll-margin-top:64px}
+  .p-head{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,80px);margin-bottom:clamp(36px,5vw,64px);align-items:end}
+  .p-num{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;display:flex;gap:12px;align-items:center;margin-bottom:18px}
+  .p-num i{width:28px;height:1px;background:currentColor;opacity:.6}
+  .p-title{font-size:clamp(40px,7vw,104px);font-weight:500;letter-spacing:-.045em;line-height:.92}
+  .p-title em{font-family:"Instrument Serif",serif;font-weight:400;color:var(--pac);letter-spacing:-.02em}
+  .p-desc{font-size:clamp(16px,1.35vw,19px);line-height:1.55;max-width:52ch;opacity:.9}
+  .p-meta{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 32px;margin-top:24px;font-size:13px}
+  .p-meta dt{text-transform:uppercase;letter-spacing:.12em;opacity:.6;font-size:11px}
+  .p-meta dd{margin-top:2px}
+
+  /* Feed galleries (4:5 posts) */
+  .feed{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:clamp(6px,.8vw,12px)}
+  .shot{display:block;width:100%;padding:0;border:0;background:color-mix(in srgb,var(--pfg) 8%,transparent);cursor:zoom-in;overflow:hidden;border-radius:3px;position:relative}
+  .shot img{width:100%;height:auto;transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .6s}
+  .shot:hover img{transform:scale(1.025)}
+  .shot:focus-visible{outline:2px solid var(--pac);outline-offset:3px}
+
+  /* Branding (mockups) */
+  .bento{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,.8vw,12px);
+    grid-template-areas:"a a" "b c" "d e" "d f" "g h"}
+  .bento .shot{height:100%}
+  .bento .shot img{height:100%;object-fit:cover}
+  .bento > :nth-child(1){grid-area:a} .bento > :nth-child(2){grid-area:b} .bento > :nth-child(3){grid-area:c}
+  .bento > :nth-child(4){grid-area:e} .bento > :nth-child(5){grid-area:d} .bento > :nth-child(6){grid-area:f}
+  .bento > :nth-child(7){grid-area:g} .bento > :nth-child(8){grid-area:h}
+
+  /* Uploaded / recent */
+  .recent{padding-bottom:clamp(56px,8vw,96px)}
+  .recent .feed{--pfg:var(--fg);--pac:var(--accent)}
+  .cap{display:flex;justify-content:space-between;gap:12px;padding-top:10px;font-size:14px}
+  .cap span:last-child{color:var(--muted);font-size:13px;white-space:nowrap}
+
+  /* Archive */
+  .archive{border-top:1px solid var(--line)}
+  .arch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-top:36px}
+  .arch-grid figure .ph{aspect-ratio:4/3.1;border-radius:3px;overflow:hidden;background:var(--card)}
+  .arch-grid img{width:100%;height:100%;object-fit:cover}
+  .arch-grid figcaption{font-size:14px;padding-top:10px}
+  .arch-grid figcaption small{display:block;color:var(--muted);font-size:12px}
+  .arch-note{color:var(--muted);max-width:56ch;margin-top:14px}
+
+  /* About */
+  .about{border-top:1px solid var(--line);padding:clamp(64px,9vw,120px) 0}
+  .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(32px,6vw,96px)}
+  .lead{font-size:clamp(22px,2.6vw,34px);line-height:1.25;letter-spacing:-.02em}
+  .lead em{font-family:"Instrument Serif",serif;color:var(--accent)}
+  .xp{margin-top:48px;border-top:1px solid var(--line)}
+  .xp-row{display:grid;grid-template-columns:1fr 1.6fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .xp-row h3{font-size:17px;font-weight:500;letter-spacing:-.01em}
+  .xp-row .where{font-size:14px;color:var(--muted)}
+  .xp-row p{color:var(--muted);font-size:15px}
+  .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px;list-style:none}
+  .skills li{font-size:13px;padding:7px 14px;border:1px solid var(--line);border-radius:999px}
+  .h4{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:500;margin-top:48px}
+
+  /* Contact */
+  .contact{background:var(--fg);color:var(--bg);padding:clamp(64px,9vw,120px) 0 32px}
+  .contact .eyebrow{color:color-mix(in srgb,var(--bg) 60%,transparent)}
+  .big-link{display:inline-block;font-size:clamp(30px,6.4vw,96px);font-weight:500;letter-spacing:-.045em;line-height:1.05;border-bottom:2px solid currentColor;padding-bottom:6px;transition:color .2s;overflow-wrap:anywhere}
+  .big-link:hover{color:var(--accent)}
+  .big-link em{font-family:"Instrument Serif",serif;font-weight:400}
+  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:clamp(64px,10vw,128px);padding-top:24px;border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);font-size:13px;color:color-mix(in srgb,var(--bg) 60%,transparent)}
+
+  /* Lightbox (stays on this page) */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(10,10,10,.94);display:none;align-items:center;justify-content:center;color:#f1eee8}
+  .lb.open{display:flex}
+  .lb figure{max-width:min(92vw,1400px);max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .lb img{max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;border-radius:2px;user-select:none}
+  .lb figcaption{font-size:14px;opacity:.75;text-align:center}
+  .lb button{position:absolute;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:inherit;width:48px;height:48px;border-radius:50%;font-size:20px;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+  .lb button:hover{background:rgba(255,255,255,.18)}
+  .lb .x{top:16px;right:16px}
+  .lb .prev{left:16px;top:50%;transform:translateY(-50%)}
+  .lb .next{right:16px;top:50%;transform:translateY(-50%)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:980px){
+    .p-head{grid-template-columns:1fr;align-items:start}
+    .feed{--cols:3 !important}
+    .about-grid{grid-template-columns:1fr}
+    .stats{justify-content:flex-start}
+  }
+  @media (max-width:640px){
+    nav ul{gap:16px}
+    .feed{--cols:2 !important}
+    .bento{grid-template-columns:1fr;grid-template-areas:none}
+    .bento > *{grid-area:auto !important}
+    .mosaic{grid-template-columns:repeat(3,1fr)}
+    .mosaic a:nth-child(n+4){display:none}
+    .index a{grid-template-columns:36px 1fr}
+    .index .k{display:none}
+    .xp-row{grid-template-columns:1fr;gap:6px}
+    .p-meta{grid-template-columns:repeat(2,auto)}
+    .lb .prev,.lb .next{top:auto;bottom:20px;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo">Ender Alvarez<span>.</span></a>
+      <ul>
+        <li><a href="#trabajo">Trabajo</a></li>
+        <li><a href="#perfil">Perfil</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow"><span class="dot"></span>Diseño gráfico · Dirección de arte · Guatemala</div>
+      <h1 class="reveal">Marcas con<br>identidad, piezas<br>con <em>intención.</em></h1>
+      <div class="hero-foot">
+        <p class="reveal">Diseñador gráfico y director de arte. Desarrollo branding, identidad visual y líneas gráficas para redes sociales que responden a lo que cada marca necesita comunicar.</p>
+        <div class="stats reveal">
+          <div class="stat"><b id="statBrands">7</b><small>Marcas</small></div>
+          <div class="stat"><b id="statPieces">73</b><small>Piezas</small></div>
+          <div class="stat"><b>2026</b><small>Trabajo reciente</small></div>
+        </div>
+      </div>
+      <div class="mosaic reveal" id="mosaic"></div>
+    </section>
+
+    <section class="sec" id="trabajo">
+      <div class="eyebrow"><span class="dot"></span>Trabajo seleccionado</div>
+      <h2>Proyectos <em>2026</em></h2>
+      <ol class="index" id="index"></ol>
+    </section>
+  </div>
+
+  <div class="wrap recent" id="recent" hidden>
+    <div class="eyebrow"><span class="dot"></span>Recientes</div>
+    <div class="feed" id="recentGrid" style="--cols:4"></div>
+  </div>
+
+  <div id="projects"></div>
+
+  <div class="wrap">
+    <section class="sec archive" id="archivo">
+      <div class="eyebrow"><span class="dot"></span>Archivo</div>
+      <h2>Proyectos <em>académicos</em></h2>
+      <p class="arch-note">Trabajos de la etapa universitaria: branding, packaging, editorial y afiches.</p>
+      <div class="arch-grid" id="archive"></div>
+    </section>
+
+    <section class="about" id="perfil">
+      <div class="about-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>Perfil</div>
+        </div>
+        <div>
+          <p class="lead reveal">Desarrollo propuestas visuales que responden a las necesidades de cada cliente, respetando su <em>identidad de marca</em> y sus objetivos de comunicación.</p>
+
+          <div class="xp reveal">
+            <div class="xp-row">
+              <div><h3>Director de arte</h3><div class="where">Agencia de marketing digital · Actualmente</div></div>
+              <p>Dirijo y coordino procesos creativos: distribuyo tareas, oriento las propuestas gráficas según los objetivos de cada cliente y superviso que cada pieza respete la línea gráfica de la marca.</p>
+            </div>
+            <div class="xp-row">
+              <div><h3>Docente universitario</h3><div class="where">Universidad Da Vinci de Guatemala · Actualmente</div></div>
+              <p>Imparto cursos universitarios y contribuyo a la formación de nuevos diseñadores.</p>
+            </div>
+            <div class="xp-row">
+              <div><h3>Arte final y procesos gráficos</h3><div class="where">Pasantías en estudios de impresión</div></div>
+              <p>Preparación y adaptación de diseños según los requerimientos técnicos de producción e impresión.</p>
+            </div>
+          </div>
+
+          <div class="h4">Habilidades</div>
+          <ul class="skills reveal">
+            <li>Dirección de arte</li><li>Branding e identidad visual</li><li>Diseño para redes sociales</li>
+            <li>Arte final para impresión</li><li>Desarrollo de conceptos visuales</li><li>Coordinación de equipos creativos</li>
+            <li>Comunicación con clientes</li><li>Organización de proyectos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="contact" id="contacto">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>¿Trabajamos juntos?</div>
+      <a class="big-link" href="mailto:enderalv12@gmail.com">enderalv12<em>@</em>gmail.com</a>
+      <footer>
+        <span>© 2026 Ender Alvarez</span>
+        <span>Guatemala</span>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<!-- Visor a pantalla completa: se abre sobre la misma página -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visor de diseños">
+  <button class="x" type="button" aria-label="Cerrar">✕</button>
+  <button class="prev" type="button" aria-label="Anterior">←</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="next" type="button" aria-label="Siguiente">→</button>
+</div>
+
+<script>
+const W = "assets/work/";
+
+// Proyectos. "n" = cantidad de piezas en assets/work/<slug>/NN-lg.webp y NN-sm.webp
+const PROJECTS = [
+  { slug:"danta-chocolate", title:"Danta <em>Chocolate</em>", name:"Danta Chocolate", kind:"Branding", sector:"Chocolatería premium", n:8, layout:"brand",
+    sizes:[[2000,1333],[2000,1317],[2000,1334],[2000,1333],[2000,2571],[2000,1333],[2000,1314],[2000,1333]],
+    desc:"Propuesta de branding para una chocolatería guatemalteca de clase mundial. El reto no era inventar algo nuevo, sino revelar lo que la marca ya es —origen, técnica y detalle— y llevarlo a cada punto de contacto, de la papelería a la señalética. Sabor que trasciende.",
+    theme:{bg:"#15302a", fg:"#ece2d0", ac:"#c9965f"} },
+  { slug:"dr-adrian-gil", title:"Dr. Adrián <em>Gil</em>", name:"Dr. Adrián Gil", kind:"Línea gráfica para redes", sector:"Cirugía plástica", n:12, cols:4,
+    desc:"Identidad visual médica de alto nivel, sobria y editorial. La fotografía en primer plano y la iluminación contrastada ponen el procedimiento como protagonista; las líneas finas señalan áreas de interés sin competir con la imagen.",
+    theme:{bg:"#0e0d0c", fg:"#ece3d9", ac:"#c7a689"} },
+  { slug:"macizo", title:"<em>Macizo</em>", name:"Macizo", kind:"Línea gráfica para redes", sector:"Materiales de construcción", n:6, cols:3,
+    desc:"Feed para una marca de materiales de construcción: fotografía de producto con luz dramática, tipografía condensada y acentos en rojo corporativo. Una comunicación moderna, directa y contundente, cercana al trabajo bien hecho.",
+    theme:{bg:"#e8e6e2", fg:"#1a1a1a", ac:"#c8322a"} },
+  { slug:"crecikids", title:"Creci<em>Kids</em>", name:"CreciKids", kind:"Línea gráfica para redes", sector:"Vitaminas infantiles", n:12, cols:4,
+    desc:"Un feed que habla a padres y niños al mismo tiempo: fotografía real y cercana, la mascota como hilo conductor y dinámicas lúdicas como adivinanzas. Una segunda línea lleva el producto a toda la familia. Naranja, azul y amarillo aportan energía sin saturar.",
+    theme:{bg:"#fdf1e3", fg:"#3b2614", ac:"#e5700c"} },
+  { slug:"austin", title:"<em>Austin</em>", name:"Austin", kind:"Línea gráfica para redes", sector:"Moda y accesorios", n:9, cols:3,
+    desc:"Botas, sombreros y cinturones presentados desde su material: texturas de cuero, fotografía de detalle en penumbra y una serif condensada que construyen una presencia cálida, artesanal y coherente.",
+    theme:{bg:"#2b1d14", fg:"#f1e4d3", ac:"#d2945e"} },
+  { slug:"colegio-cbc-el-carmen", title:"Colegio CBC <em>El Carmen</em>", name:"Colegio CBC El Carmen", kind:"Línea gráfica para redes", sector:"Educación", n:12, cols:4,
+    desc:"Campaña de inscripciones y oferta académica. El azul institucional da confianza; los acentos en amarillo, celeste y fucsia aportan energía, y la fotografía de estudiantes muestra una comunidad activa más allá del aula.",
+    theme:{bg:"#172462", fg:"#eef1ff", ac:"#f6c645"} },
+  { slug:"crea-digital-media", title:"Crea <em>Digital Media</em>", name:"Crea Digital Media", kind:"Línea gráfica para redes", sector:"Publicidad exterior", n:14, cols:4,
+    desc:"Tres direcciones para una empresa de pantallas LED en Guatemala: una gráfica de datos en rojo y carbón, una institucional en azul profundo y una editorial con serif y vallas en contexto urbano.",
+    theme:{bg:"#f3efea", fg:"#1f1f1f", ac:"#c9403a"} }
+];
+
+// Trabajos académicos (portadas tomadas de Behance; se muestran aquí sin enlaces)
+const B = "https://mir-s3-cdn-cf.behance.net/projects/404/";
+const ARCHIVE = [
+  ["Branding Ana Vegana","Branding","c4e352120217553.Y3JvcCwyNjg5LDIxMDMsMjk5LDIyNg.png"],
+  ["Packaging Viventea","Packaging","f76506120210757.Y3JvcCwyMTczLDE3MDAsMTAsMA.png"],
+  ["Bienestar Integral","Redes sociales","4ca996120213107.Y3JvcCw5ODYsNzcxLDEwNywyMTQ.png"],
+  ["Libro de historia de Guatemala","Diagramación","7fd58f120208297.Y3JvcCwxMzgwLDEwODAsMzAsMA.png"],
+  ["Material educativo","Editorial","e68886120209161.Y3JvcCwzMjYwLDI1NTAsMTYsMA.png"],
+  ["App En Seña","UI · Colaboración","e80544107805187.Y3JvcCw0NTI5LDM1NDIsMCwxNzgy.png"],
+  ["Logofolio","Logotipos","431bdc87022305.Y3JvcCwxMzMwLDEwNDEsMTYsMA.png"],
+  ["Afiches","Afiches","f483c087024281.Y3JvcCwxMzMwLDEwNDEsMTYsMA.png"],
+  ["Escalator Music","Diseño gráfico","13947e87120331.Y3JvcCwxMzMwLDEwNDEsMTksMA.png"],
+  ["Random Space","Colaboración","29dc8f87113123.Y3JvcCwxMzMwLDEwNDEsMTksMA.png"],
+  ["Escreativo","Identidad","65b2c787019637.Y3JvcCwxMzMwLDEwNDEsMTYsMA.png"]
+];
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const pad = i => String(i).padStart(2,"0");
+
+// Galerías del visor: cada grupo es una lista de {lg, cap}
+const groups = {};
+
+function shot(group, i, lg, sm, w, h, alt, sizes){
+  groups[group] = groups[group] || [];
+  groups[group][i] = { lg, cap: alt };
+  return `<button type="button" class="shot" data-g="${esc(group)}" data-i="${i}" aria-label="Ampliar: ${esc(alt)}">
+    <img src="${esc(sm)}" srcset="${esc(sm)} ${Math.round(w/2)}w, ${esc(lg)} ${w}w" sizes="${sizes}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">
+  </button>`;
+}
+
+// ---- Proyectos ----
+const projEl = document.getElementById("projects");
+projEl.innerHTML = PROJECTS.map((p, pi) => {
+  const files = Array.from({length:p.n}, (_, k) => pad(k+1));
+  const src = (f, s) => `${W}${p.slug}/${f}-${s}.webp`;
+  const alt = k => `${p.name} — pieza ${k+1} de ${p.n}`;
+  let gallery;
+  if (p.layout === "brand") {
+    // Cuadrícula: portada a todo el ancho, y la foto vertical (05) junto a dos horizontales
+    gallery = `<div class="bento">${files.map((f,k) => { const [w,h] = p.sizes[k];
+      return shot(p.slug, k, src(f,"lg"), src(f,"sm"), w, h, alt(k), k === 0 ? "(max-width:1320px) 100vw, 1320px" : "(max-width:640px) 100vw, 50vw"); }).join("")}</div>`;
+  } else {
+    gallery = `<div class="feed" style="--cols:${p.cols}">${files.map((f,k) =>
+      shot(p.slug, k, src(f,"lg"), src(f,"sm"), 1080, 1350, alt(k), `(max-width:640px) 50vw, (max-width:980px) 33vw, ${Math.round(100/p.cols)}vw`)).join("")}</div>`;
+  }
+  return `<section class="project" id="${p.slug}" style="--pbg:${p.theme.bg};--pfg:${p.theme.fg};--pac:${p.theme.ac}">
+    <div class="wrap">
+      <div class="p-head reveal">
+        <div>
+          <div class="p-num">${pad(pi+1)}<i></i>${esc(p.kind)}</div>
+          <h3 class="p-title">${p.title}</h3>
+        </div>
+        <div>
+          <p class="p-desc">${esc(p.desc)}</p>
+          <dl class="p-meta">
+            <div><dt>Sector</dt><dd>${esc(p.sector)}</dd></div>
+            <div><dt>Año</dt><dd>2026</dd></div>
+            <div><dt>Piezas</dt><dd>${p.n}</dd></div>
+          </dl>
+        </div>
+      </div>
+      ${gallery}
+    </div>
+  </section>`;
+}).join("");
+
+// ---- Índice ----
+document.getElementById("index").innerHTML = PROJECTS.map((p,i) =>
+  `<li><a href="#${p.slug}"><span class="n">${pad(i+1)}</span><span class="t">${esc(p.name)}</span><span class="k">${esc(p.kind)} · ${esc(p.sector)}</span></a></li>`).join("");
+
+// ---- Mosaico del inicio (lleva a cada proyecto dentro de la página) ----
+const MOSAIC = [["macizo",2],["dr-adrian-gil",5],["crecikids",4],["austin",5],["crea-digital-media",5]];
+document.getElementById("mosaic").innerHTML = MOSAIC.map(([s,i]) => {
+  const p = PROJECTS.find(x => x.slug === s);
+  return `<a href="#${s}" aria-label="Ver ${esc(p.name)}"><img src="${W}${s}/${pad(i)}-sm.webp" width="540" height="675" alt="${esc(p.name)}"></a>`;
+}).join("");
+
+// ---- Archivo ----
+document.getElementById("archive").innerHTML = ARCHIVE.map(([t,k,img]) =>
+  `<figure><div class="ph"><img src="${B}${img}" alt="${esc(t)}" loading="lazy" onerror="this.remove()"></div><figcaption>${esc(t)}<small>${esc(k)}</small></figcaption></figure>`).join("");
+
+// ---- Contadores ----
+let pieces = PROJECTS.reduce((a,p) => a + p.n, 0);
+const setStats = extra => {
+  document.getElementById("statPieces").textContent = pieces + extra;
+};
+setStats(0);
+
+// ---- Subidas desde uploads.html (uploads.json en el repositorio) ----
+(async () => {
+  try{
+    const res = await fetch("uploads.json?v=" + Date.now(), { cache:"no-store" });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!Array.isArray(data) || !data.length) return;
+    const grid = document.getElementById("recentGrid");
+    grid.innerHTML = data.map((r,i) => `<div>${shot("recent", i, r.image, r.image, 1080, 1350, r.title, "(max-width:640px) 50vw, 25vw")}
+      <div class="cap"><span>${esc(r.title)}</span><span>${esc(r.tag || r.category || "")}</span></div></div>`).join("");
+    grid.querySelectorAll("img").forEach(img => { img.removeAttribute("srcset"); img.removeAttribute("height"); });
+    document.getElementById("recent").hidden = false;
+    setStats(data.length);
+  }catch(e){ /* sin subidas todavía */ }
+})();
+
+// ---- Visor ----
+const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+let cur = { g:null, i:0 }, lastFocus = null;
+function showLb(){
+  const list = groups[cur.g]; const it = list[cur.i];
+  lbImg.src = it.lg; lbImg.alt = it.cap;
+  lbCap.textContent = `${it.cap}`;
+  const multi = list.length > 1;
+  lb.querySelector(".prev").hidden = !multi; lb.querySelector(".next").hidden = !multi;
+  // precarga la siguiente
+  const nx = list[(cur.i + 1) % list.length]; if (nx) { const im = new Image(); im.src = nx.lg; }
+}
+function openLb(g, i){ lastFocus = document.activeElement; cur = { g, i }; showLb(); lb.classList.add("open"); document.body.style.overflow = "hidden"; lb.querySelector(".x").focus(); }
+function closeLb(){ lb.classList.remove("open"); document.body.style.overflow = ""; lbImg.removeAttribute("src"); lastFocus && lastFocus.focus(); }
+function step(d){ const n = groups[cur.g].length; cur.i = (cur.i + d + n) % n; showLb(); }
+
+document.addEventListener("click", e => {
+  const b = e.target.closest(".shot");
+  if (b) openLb(b.dataset.g, +b.dataset.i);
+});
+lb.querySelector(".x").addEventListener("click", closeLb);
+lb.querySelector(".prev").addEventListener("click", () => step(-1));
+lb.querySelector(".next").addEventListener("click", () => step(1));
+lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+document.addEventListener("keydown", e => {
+  if (!lb.classList.contains("open")) return;
+  if (e.key === "Escape") closeLb();
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+let tx = null;
+lb.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive:true });
+lb.addEventListener("touchend", e => {
+  if (tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx; tx = null;
+  if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+});
+
+// ---- Animación de entrada ----
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}), { threshold:.1 }) : null;
+document.querySelectorAll(".reveal").forEach(el => io ? io.observe(el) : el.classList.add("in"));
+</script>
+</body>
+</html>

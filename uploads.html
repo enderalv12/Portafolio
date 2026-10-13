@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Subir trabajo — Ender Alvarez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f4f2ee; --fg:#141414; --muted:#6d6a65; --line:#d9d5ce; --card:#e9e6e0; --accent:#e4572e; --ok:#2f7d4f; }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#121212; --fg:#efece6; --muted:#9a968f; --line:#2c2b29; --card:#1d1c1b; --accent:#ff6a3d; --ok:#5fbf86; }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(32px,6vw,72px) 16px}
+  header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:48px}
+  .logo{font-weight:600;letter-spacing:-.02em;text-decoration:none}
+  .logo span{color:var(--accent)}
+  h1{font-size:clamp(32px,6vw,56px);font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:12px}
+  h1 em{font-family:"Instrument Serif",serif;font-weight:400}
+  h2{font-size:22px;font-weight:500;letter-spacing:-.02em;margin:56px 0 20px}
+  .sub{color:var(--muted);margin-bottom:36px}
+  .panel{border:1px solid var(--line);border-radius:6px;padding:clamp(20px,4vw,32px);background:color-mix(in srgb,var(--card) 40%,transparent)}
+  label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  input,select{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg)}
+  input:focus,select:focus{outline:2px solid var(--fg);outline-offset:1px}
+  .field{margin-bottom:20px}
+  .hint{font-size:13px;color:var(--muted);margin-top:6px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .check{display:flex;gap:10px;align-items:center;font-size:15px;color:var(--fg);text-transform:none;letter-spacing:0}
+  .check input{width:18px;height:18px}
+  button{font:inherit;font-size:15px;font-weight:500;padding:12px 22px;border-radius:999px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer}
+  button.ghost{background:transparent;color:var(--fg)}
+  button:disabled{opacity:.5;cursor:wait}
+  .drop{display:grid;place-items:center;text-align:center;aspect-ratio:16/7;border:1.5px dashed var(--line);border-radius:6px;cursor:pointer;color:var(--muted);overflow:hidden;position:relative;transition:border-color .2s;text-transform:none;letter-spacing:0;font-size:15px}
+  .drop:hover,.drop.over{border-color:var(--fg);color:var(--fg)}
+  .drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .drop input{display:none}
+  .msg{margin-top:16px;font-size:14px;min-height:1.5em}
+  .msg.err{color:var(--accent)} .msg.ok{color:var(--ok)}
+  .repo{font-size:13px;color:var(--muted)}
+  .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+  .item{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .item .ph{width:100%;aspect-ratio:4/3;background:var(--card);display:grid;place-items:center;font-size:13px;color:var(--muted);overflow:hidden}
+  .item .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .item div.bar{padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px}
+  .item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .item button{padding:4px 10px;font-size:12px;background:transparent;color:var(--accent);border-color:var(--accent)}
+  .hidden{display:none!important}
+  .notice{padding:16px 20px;border-left:3px solid var(--accent);background:var(--card);border-radius:4px;font-size:15px}
+  .notice.demo{margin-bottom:40px}
+  .demo-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .demo-tabs button{padding:6px 14px;font-size:13px}
+  .demo-tabs button.on{background:var(--fg);color:var(--bg)}
+  .item .ph.sample{font-family:"Instrument Serif",serif;font-size:22px;color:var(--fg);padding:12px;text-align:center}
+  @media (max-width:600px){ .row{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="index.html">Ender Alvarez<span>.</span></a>
+    <button id="logout" class="ghost hidden">Cerrar sesión</button>
+  </header>
+
+  <div id="noconfig" class="notice demo hidden">
+    <b>Vista previa.</b> Así se verá la página cuando esté conectada a GitHub. Puedes probar todo, pero nada se guarda.
+    Para activarla, completa <code>config.js</code> (ver <code>SETUP.md</code>).
+    <div class="demo-tabs">
+      <button type="button" class="ghost" data-view="login">Pantalla de inicio</button>
+      <button type="button" class="ghost on" data-view="app">Pantalla de subida</button>
+    </div>
+  </div>
+
+  <!-- Login with a GitHub token -->
+  <section id="login" class="hidden">
+    <h1>Área <em>privada</em></h1>
+    <p class="sub">Entra con tu token de GitHub para subir trabajo nuevo al portafolio.</p>
+    <form class="panel" id="loginForm">
+      <div class="field">
+        <label for="token">Token de GitHub</label>
+        <input id="token" type="password" required autocomplete="off" placeholder="github_pat_…">
+        <p class="hint">Token "fine-grained" con acceso solo a este repositorio y permiso <b>Contents: Read and write</b>.</p>
+      </div>
+      <div class="field"><label class="check"><input type="checkbox" id="remember"> Recordar en este dispositivo</label></div>
+      <button type="submit">Entrar</button>
+      <p class="msg" id="loginMsg"></p>
+    </form>
+  </section>
+
+  <!-- Upload -->
+  <section id="app" class="hidden">
+    <h1>Subir <em>trabajo</em></h1>
+    <p class="sub">Cada subida se guarda como un commit en <span class="repo" id="repoName"></span>. GitHub Pages la publica en 1–2 minutos.</p>
+
+    <form class="panel" id="upForm">
+      <div class="field">
+        <label class="drop" id="drop">
+          <input type="file" id="file" accept="image/png,image/jpeg,image/webp,image/gif" required>
+          <span>Arrastra una imagen aquí o haz clic para elegir<br><small>PNG, JPG, WebP o GIF · máx. 10 MB</small></span>
+        </label>
+      </div>
+      <div class="field"><label for="title">Título del proyecto</label><input id="title" required maxlength="80" placeholder="Ej. Branding Café Antigua"></div>
+      <div class="row">
+        <div class="field">
+          <label for="cat">Categoría</label>
+          <select id="cat">
+            <option value="branding">Branding</option>
+            <option value="editorial">Editorial</option>
+            <option value="packaging">Packaging</option>
+            <option value="digital">Digital</option>
+            <option value="grafico">Gráfico</option>
+          </select>
+        </div>
+        <div class="field"><label for="tag">Etiqueta (opcional)</label><input id="tag" maxlength="40" placeholder="Ej. Identidad visual"></div>
+      </div>
+      <div class="field"><label class="check"><input type="checkbox" id="featured"> Destacar (tarjeta grande)</label></div>
+      <button type="submit" id="upBtn">Publicar</button>
+      <p class="msg" id="upMsg"></p>
+    </form>
+
+    <h2>Subidos</h2>
+    <div class="list" id="list"><p class="sub">Cargando…</p></div>
+  </section>
+</div>
+
+<script src="config.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const show = (id, on) => $(id).classList.toggle("hidden", !on);
+const say = (id, text, kind) => { const el = $(id); el.textContent = text; el.className = "msg" + (kind ? " " + kind : ""); };
+
+// ---- Repo settings (config.js, or auto-detected on GitHub Pages) ----
+const cfg = Object.assign({ GITHUB_BRANCH:"main" }, window.PORTFOLIO_CONFIG || {});
+if ((!cfg.GITHUB_OWNER || !cfg.GITHUB_REPO) && location.hostname.endsWith(".github.io")) {
+  cfg.GITHUB_OWNER = cfg.GITHUB_OWNER || location.hostname.split(".")[0];
+  const first = location.pathname.split("/").filter(Boolean)[0];
+  cfg.GITHUB_REPO = cfg.GITHUB_REPO || (first && !first.endsWith(".html") ? first : location.hostname);
+}
+const OWNER = cfg.GITHUB_OWNER, REPO = cfg.GITHUB_REPO, BRANCH = cfg.GITHUB_BRANCH;
+const LIST_PATH = "uploads.json", DIR = "uploads";
+const TOKEN_KEY = "gh_upload_token";
+
+// ---- Token storage (session by default, local if "remember") ----
+const store = {
+  get(){ try{ return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY); }catch{ return null; } },
+  set(t, remember){ try{ (remember ? localStorage : sessionStorage).setItem(TOKEN_KEY, t); }catch{} },
+  clear(){ try{ sessionStorage.removeItem(TOKEN_KEY); localStorage.removeItem(TOKEN_KEY); }catch{} }
+};
+let token = null;
+
+// ---- GitHub API helpers ----
+async function gh(path, opts = {}){
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}${path}`, {
+    ...opts,
+    headers:{
+      "Accept":"application/vnd.github+json",
+      "Authorization":`Bearer ${token}`,
+      "X-GitHub-Api-Version":"2022-11-28",
+      ...(opts.body ? {"Content-Type":"application/json"} : {})
+    }
+  });
+  if (!res.ok) {
+    let msg = res.status + "";
+    try{ msg = (await res.json()).message || msg; }catch{}
+    const err = new Error(msg); err.status = res.status; throw err;
+  }
+  return res.status === 204 ? null : res.json();
+}
+const contentsUrl = p => `/contents/${p.split("/").map(encodeURIComponent).join("/")}`;
+const utf8ToB64 = s => { const b = new TextEncoder().encode(s); let bin = ""; b.forEach(x => bin += String.fromCharCode(x)); return btoa(bin); };
+const b64ToUtf8 = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\n/g,"")), c => c.charCodeAt(0)));
+const fileToB64 = f => new Promise((ok, fail) => { const r = new FileReader(); r.onload = () => ok(r.result.split(",")[1]); r.onerror = fail; r.readAsDataURL(f); });
+
+async function readList(){
+  try{
+    const f = await gh(`${contentsUrl(LIST_PATH)}?ref=${encodeURIComponent(BRANCH)}`);
+    const data = JSON.parse(b64ToUtf8(f.content) || "[]");
+    return { items: Array.isArray(data) ? data : [], sha: f.sha };
+  }catch(e){
+    if (e.status === 404) return { items: [], sha: null };
+    throw e;
+  }
+}
+
+// Read-modify-write uploads.json; retry if someone else committed in between.
+async function updateList(change, message){
+  for (let attempt = 0; attempt < 3; attempt++){
+    const { items, sha } = await readList();
+    const next = change(items);
+    try{
+      await gh(contentsUrl(LIST_PATH), { method:"PUT", body: JSON.stringify({
+        message, branch: BRANCH, content: utf8ToB64(JSON.stringify(next, null, 2) + "\n"), ...(sha ? { sha } : {})
+      })});
+      return next;
+    }catch(e){ if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  throw new Error("uploads.json cambió mientras guardabas. Intenta de nuevo.");
+}
+
+// ---- Auth ----
+async function signIn(t){
+  token = t;
+  const repo = await gh("");
+  if (!repo.permissions || !repo.permissions.push) throw new Error("El token no tiene permiso de escritura en el repositorio.");
+  return repo;
+}
+function signOut(){ token = null; store.clear(); show("app", false); show("logout", false); show("login", true); }
+
+// ---- Preview mode: no repo configured, nothing is saved ----
+const DEMO = !OWNER || !REPO;
+const demoItems = [
+  { id:"d1", title:"Branding Café Antigua", sample:true },
+  { id:"d2", title:"Afiche Festival de Jazz", sample:true },
+  { id:"d3", title:"Packaging Té de Montaña", sample:true }
+];
+const pause = ms => new Promise(r => setTimeout(r, ms));
+function demoView(v){
+  document.querySelectorAll(".demo-tabs button").forEach(b => b.classList.toggle("on", b.dataset.view === v));
+  show("login", v === "login"); show("app", v === "app"); show("logout", v === "app");
+  if (v === "app") loadList();
+}
+
+if (DEMO) {
+  show("noconfig", true);
+  $("repoName").textContent = "tu-usuario/tu-repo (main)";
+  document.querySelectorAll(".demo-tabs button").forEach(b => b.addEventListener("click", () => demoView(b.dataset.view)));
+  demoView("app");
+} else {
+  $("repoName").textContent = `${OWNER}/${REPO} (${BRANCH})`;
+  const saved = store.get();
+  if (saved) {
+    signIn(saved).then(enter).catch(() => { store.clear(); show("login", true); });
+  } else show("login", true);
+}
+
+function enter(){ show("login", false); show("app", true); show("logout", true); loadList(); }
+
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  say("loginMsg", "Verificando…");
+  const t = $("token").value.trim();
+  if (DEMO) { await pause(600); $("token").value = ""; say("loginMsg", ""); return demoView("app"); }
+  try{
+    await signIn(t);
+    store.set(t, $("remember").checked);
+    $("token").value = ""; say("loginMsg", "");
+    enter();
+  }catch(err){
+    token = null;
+    say("loginMsg", err.status === 401 ? "Token inválido o vencido." : err.status === 404 ? "No se encontró el repositorio (o el token no tiene acceso a él)." : err.message, "err");
+  }
+});
+$("logout").addEventListener("click", () => DEMO ? demoView("login") : signOut());
+
+// ---- Image picker + drag and drop ----
+const drop = $("drop"), file = $("file");
+function preview(f){
+  drop.querySelector("img")?.remove();
+  if (!f) return;
+  const img = document.createElement("img"); img.src = URL.createObjectURL(f); img.alt = "";
+  drop.appendChild(img);
+}
+file.addEventListener("change", () => preview(file.files[0]));
+["dragenter","dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => {
+  const f = e.dataTransfer.files[0];
+  if (f) { const dt = new DataTransfer(); dt.items.add(f); file.files = dt.files; preview(f); }
+});
+
+// ---- Upload: commit the image, then add it to uploads.json ----
+const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40) || "proyecto";
+
+$("upForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = file.files[0];
+  if (!f) return say("upMsg", "Elige una imagen.", "err");
+  if (!/^image\/(png|jpe?g|webp|gif)$/.test(f.type)) return say("upMsg", "Formato no permitido.", "err");
+  if (f.size > 10 * 1024 * 1024) return say("upMsg", "La imagen pesa más de 10 MB.", "err");
+
+  const title = $("title").value.trim();
+  const ext = ({"image/png":"png","image/jpeg":"jpg","image/webp":"webp","image/gif":"gif"})[f.type];
+  const path = `${DIR}/${Date.now()}-${slug(title)}.${ext}`;
+  const entry = {
+    id: path,
+    title,
+    category: $("cat").value,
+    tag: $("tag").value.trim() || null,
+    featured: $("featured").checked,
+    image: path,
+    created_at: new Date().toISOString()
+  };
+
+  $("upBtn").disabled = true;
+  if (DEMO) {
+    say("upMsg", "Subiendo imagen…"); await pause(700);
+    say("upMsg", "Actualizando el portafolio…"); await pause(500);
+    demoItems.unshift({ ...entry, image: URL.createObjectURL(f) });
+    e.target.reset(); preview(null);
+    say("upMsg", "Vista previa: así se vería al guardar. No se subió nada.", "ok");
+    $("upBtn").disabled = false;
+    return loadList();
+  }
+  try{
+    say("upMsg", "Subiendo imagen…");
+    await gh(contentsUrl(path), { method:"PUT", body: JSON.stringify({
+      message: `Agregar imagen: ${title}`, branch: BRANCH, content: await fileToB64(f)
+    })});
+    say("upMsg", "Actualizando el portafolio…");
+    await updateList(items => [entry, ...items], `Agregar proyecto: ${title}`);
+    e.target.reset(); preview(null);
+    say("upMsg", "¡Guardado en GitHub! Aparecerá en el sitio en 1–2 minutos.", "ok");
+    loadList();
+  }catch(err){
+    say("upMsg", "Error: " + err.message, "err");
+  }finally{ $("upBtn").disabled = false; }
+});
+
+// ---- List + delete ----
+async function loadList(){
+  try{
+    const { items } = DEMO ? { items: demoItems } : await readList();
+    if (!items.length) { $("list").innerHTML = `<p class="sub">Todavía no has subido nada.</p>`; return; }
+    $("list").innerHTML = items.map(r => `
+      <div class="item">
+        ${r.sample
+          ? `<div class="ph sample">${esc(r.title)}</div>`
+          : `<div class="ph"><img src="${esc(r.image)}" alt="" loading="lazy" onerror="this.replaceWith('Publicando…')"></div>`}
+        <div class="bar"><span title="${esc(r.title)}">${esc(r.title)}</span><button data-id="${esc(r.id)}">Borrar</button></div>
+      </div>`).join("");
+  }catch(err){
+    $("list").innerHTML = `<p class="msg err">${esc(err.message)}</p>`;
+  }
+}
+
+$("list").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-id]");
+  if (!b || !confirm("¿Borrar este proyecto del portafolio?")) return;
+  b.disabled = true;
+  const id = b.dataset.id;
+  if (DEMO) {
+    const i = demoItems.findIndex(x => x.id === id);
+    if (i > -1) demoItems.splice(i, 1);
+    return loadList();
+  }
+  try{
+    let removed = null;
+    await updateList(items => items.filter(x => (x.id === id ? (removed = x, false) : true)), `Quitar proyecto: ${id}`);
+    const img = removed && removed.image;
+    if (img && img.startsWith(DIR + "/")) {
+      try{
+        const meta = await gh(`${contentsUrl(img)}?ref=${encodeURIComponent(BRANCH)}`);
+        await gh(contentsUrl(img), { method:"DELETE", body: JSON.stringify({ message:`Borrar imagen: ${img}`, sha: meta.sha, branch: BRANCH }) });
+      }catch(err){ if (err.status !== 404) console.warn(err); }
+    }
+    loadList();
+  }catch(err){ alert(err.message); b.disabled = false; }
+});
+</script>
+</body>
+</html>
